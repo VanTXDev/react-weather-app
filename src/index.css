@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: "Roboto", Arial !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("../public/bg_body.jpg");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-attachment: fixed;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
