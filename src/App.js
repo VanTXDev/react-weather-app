@@ -22,13 +22,15 @@ function App() {
       .then(async (response) => {
         const currentweatherResponse = await response[0].json();
         const forecastResponse = await response[1].json();
-
-        setCurrentWeather({ city: searchKey.label, ...currentweatherResponse });
-        setForecast({ city: searchKey.label, ...forecastResponse });
+        var cityName = searchKey.label;
+        if(cityName === "" || cityName === undefined) {
+          cityName = currentweatherResponse.name;
+        }
+        setCurrentWeather({ city: cityName, ...currentweatherResponse });
+        setForecast({ city: cityName, ...forecastResponse });
       })
       .catch((err) => console.log(err));
   };
-  console.log(currentWeather);
   console.log(forecast);
 
   return (
@@ -36,6 +38,7 @@ function App() {
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forecast data={forecast} />}
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1162.021881810139!2d109.13417127327953!3d11.583357753726103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1669264474536!5m2!1svi!2s" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="ifr-map"></iframe>
     </div>
   );
 }

@@ -1,4 +1,10 @@
 .container {
   max-width: 1000px;
   margin: 20px auto;
+  position: relative;
+}
+.ifr-map{
+  width: 100%;
+  height: 450px;
+  border:0;
 }
