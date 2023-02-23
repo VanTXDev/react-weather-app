@@ -8,3 +8,11 @@
   height: 450px;
   border:0;
 }
+#ifr-weather{
+  display: block;
+  margin: 20px 0;
+}
+#ifr-weather iframe{
+  width: 100%;
+  height: 700px;
+}

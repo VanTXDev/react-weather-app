@@ -6,7 +6,7 @@ import InputSearch from "./input-search";
 
 function Search({ onSearchChange }) {
   const [searchKey, setSearchKey] = useState(null);
-  const [searchType, setSearchtype] = useState(null);
+  const [searchType, setSearchtype] = useState("0");
 
   const loadOptions = (inVal) => {
     return fetch(
@@ -65,7 +65,7 @@ function Search({ onSearchChange }) {
       )}
       <Form.Select aria-label="Default select example" id="searchType" onChange={handleSearchTypeChange}>
         <option value="0" selected>City Name</option>
-        <option value="2">Position</option>
+        <option value="1">Position</option>
     </Form.Select>
     </>
   );

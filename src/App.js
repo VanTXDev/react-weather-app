@@ -8,6 +8,8 @@ import Forecast from "./components/forecast/forecast";
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [latVal, setLatVal] = useState(11.546);
+  const [lonVal, setLonVal] = useState(109.145);
 
   const handleOnSearchChange = (searchKey) => {
     const [lat, lon] = searchKey.value.split(" ");
@@ -23,22 +25,43 @@ function App() {
         const currentweatherResponse = await response[0].json();
         const forecastResponse = await response[1].json();
         var cityName = searchKey.label;
-        if(cityName === "" || cityName === undefined) {
+        if (cityName === "" || cityName === undefined) {
           cityName = currentweatherResponse.name;
         }
         setCurrentWeather({ city: cityName, ...currentweatherResponse });
         setForecast({ city: cityName, ...forecastResponse });
+        setLatVal(lat);
+        setLonVal(lon);
       })
       .catch((err) => console.log(err));
   };
-  console.log(forecast);
-
+  const handleOnClickIfrWeather = () => {
+  };
   return (
     <div className="container">
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forecast data={forecast} />}
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1162.021881810139!2d109.13417127327953!3d11.583357753726103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1669264474536!5m2!1svi!2s" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="ifr-map"></iframe>
+      {latVal && lonVal && (
+        <div id="ifr-weather">
+          <iframe
+            onClick={handleOnClickIfrWeather()}
+            src={
+              "https://embed.windy.com/embed2.html?lat=" +
+              latVal +
+              "&lon=" +
+              lonVal +
+              "&zoom=14&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=true&detailLat=" +
+              latVal +
+              "&detailLon=" +
+              lonVal +
+              "&metricWind=default&metricTemp=default"
+            }
+            frameborder="0"
+            title="ifr-windy"
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 }
